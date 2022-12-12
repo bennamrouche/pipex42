@@ -1,0 +1,17 @@
+5
+Makefile
+cmd.c
+cmd.o
+error.c
+error.h
+error.o
+in
+l
+libft
+main
+main.c
+out
+pipex
+pipex.c
+pipex.h
+pipex.o

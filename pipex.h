@@ -6,7 +6,7 @@
 /*   By: ebennamr <ebennamr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:37:33 by ebennamr          #+#    #+#             */
-/*   Updated: 2022/12/11 18:09:12 by ebennamr         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:47:34 by ebennamr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "error.h"
+
 typedef struct s_data
 {
 	pid_t pid1;
@@ -30,4 +31,6 @@ typedef struct s_data
 	char *cmd;
 } data;
 
+int		cmd1(data info, char **av, char **env);
+int		cmd2(data info, char **av, char **env);
 #endif
