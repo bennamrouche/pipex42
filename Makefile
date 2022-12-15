@@ -6,7 +6,7 @@
 #    By: ebennamr <ebennamr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 14:43:07 by ebennamr          #+#    #+#              #
-#    Updated: 2022/12/12 18:19:09 by ebennamr         ###   ########.fr        #
+#    Updated: 2022/12/14 15:39:47 by ebennamr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,17 +22,18 @@ OBJ = $(SRC:.c=.o)
 GREEN:=\033[0;32m
 RED:=\033[0;31m
 RESET:=\033[0m
+MARK := "✅"
 ############## Traget Block ###############
 
 all : $(NAME)
 
 $(NAME): print makelib $(OBJ)
-	@echo $(OBJ)
-	$(CC) $(FLAGS) $(OBJ)  $(LIB) -o $(NAME)
-
+	@echo "Object File Created$(MARK)"
+	@$(CC) $(FLAGS) $(OBJ)  $(LIB) -o $(NAME)
+	@echo "PIPEX Created $(MARK)"
 %.o:%.c
 	@$(CC) $(FLAGS) -c $^ -o $@
-	@echo "Object File Created"
+
 clean:
 	rm -rf $(OBJ)
 	cd libft ; make clean
@@ -42,8 +43,10 @@ fclean: clean
 re: fclean all
 
 makelib:
-	cd libft ; make
-
+	@cd libft ; make
+	@echo "libft Created $(MARK)"
+cleanlib:
+	cd libft ; make fclean;
 print:
 	@printf "====================================================\n"
 	@printf "$(GREEN)  @@@@@  $(RED)  @@@@@@@@@  $(GREEN)  @@@@@   $(RED) @@@@@@@@ $(GREEN) @@     @@\n"
@@ -54,6 +57,6 @@ print:
 	@printf "$(GREEN)  @      $(RED)      @@     $(GREEN)  @       $(RED) @        $(GREEN)   @@ @@\n"
 	@printf "$(GREEN)  @      $(RED)      @@     $(GREEN)  @       $(RED) @        $(GREEN) @@@   @@@\n"
 	@printf "$(GREEN)@@@@@@   $(RED)  @@@@@@@@@  $(GREEN)@@@@@@    $(RED) @@@@@@@  $(GREEN) @@     @@\n"
-	@printf "$(RESET)====================================================\n$(MARK)"
+	@printf "$(RESET)====================================================\n"
 
 
