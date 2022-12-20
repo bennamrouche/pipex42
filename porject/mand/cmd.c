@@ -6,31 +6,37 @@
 /*   By: ebennamr <ebennamr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:14 by ebennamr          #+#    #+#             */
-/*   Updated: 2022/12/15 20:19:06 by ebennamr         ###   ########.fr       */
+/*   Updated: 2022/12/18 17:48:35 by ebennamr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "../lib/lib.h"
 
 static void	ft_free(t_data *info)
 {
+	int	i;
+
+	i = 0;
 	if (info->list_args != NULL)
 	{
-		while (*info->list_args)
+		while (info->list_args[i])
 		{
-			free(*info->list_args);
-			info->list_args++;
+			free(info->list_args[i]);
+			i ++;
 		}
 		free(info->list_args);
 	}
+	i = 0;
 	if (info->list_paths != NULL)
 	{
-		while (*info->list_paths)
+		while (info->list_paths[i])
 		{
-			free(*info->list_paths);
-			info->list_paths++;
+			free(info->list_paths[i]);
+			i++;
 		}
 		free(info->list_paths);
+		free(info->cmd);
 	}
 }
 
@@ -68,12 +74,11 @@ int	cmd1(t_data info, char **av, char **env)
 	info.cmd = find_cmd_path(info.list_paths, info.list_args[0]);
 	if (info.cmd == NULL)
 	{
+		print_err(ER_CMD_NT, info.list_args[0]);
 		ft_free(&info);
-		print_err(ft_strjoin(ER_CMD_NT, info.list_args[0]));
-		exit(1);
+		exit(127);
 	}
-	execve(info.cmd, info.list_args, env);
-	return (0);
+	return (execve(info.cmd, info.list_args, env));
 }
 
 int	cmd2(t_data info, char **av, char **env)
@@ -85,10 +90,9 @@ int	cmd2(t_data info, char **av, char **env)
 	info.cmd = find_cmd_path(info.list_paths, info.list_args[0]);
 	if (!info.cmd)
 	{
+		print_err(ER_CMD_NT, info.list_args[0]);
 		ft_free(&info);
-		print_err(ft_strjoin(ER_CMD_NT, info.list_args[0]));
-		exit(1);
+		exit(127);
 	}
-	execve(info.cmd, info.list_args, env);
-	return (0);
+	return (execve(info.cmd, info.list_args, env));
 }

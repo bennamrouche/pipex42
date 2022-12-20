@@ -6,7 +6,7 @@
 /*   By: ebennamr <ebennamr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:38:39 by ebennamr          #+#    #+#             */
-/*   Updated: 2022/12/15 20:18:47 by ebennamr         ###   ########.fr       */
+/*   Updated: 2022/12/18 17:46:17 by ebennamr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	main(int ac, char **av, char **env)
 		return (ft_error(ER_ARG));
 	info.in_fd = open(av[1], O_RDONLY);
 	if (info.in_fd < 0)
-		print_err(ft_strjoin(ER_INFILE, av[1]));
+		print_err(ER_INFILE, av[1]);
 	info.out_fd = open(av[ac - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (info.out_fd < 0)
-		print_err(ft_strjoin(ER_OUTFILE, av[ac - 1]));
+		print_err(ER_OUTFILE, av[ac - 1]);
 	info.paths = getpath(env);
 	info.list_paths = ft_split(info.paths, ':');
 	if (pipe(info.p) == -1)
-		print_err(ER_PIPE);
+		print_err(ER_PIPE, NULL);
 	info.pid1 = fork();
 	if (info.pid1 == 0)
 		return (cmd1(info, av, env));

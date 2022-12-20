@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebennamr <ebennamr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 12:37:33 by ebennamr          #+#    #+#             */
-/*   Updated: 2022/12/15 20:18:27 by ebennamr         ###   ########.fr       */
+/*   Created: 2022/10/06 12:16:14 by ebennamr          #+#    #+#             */
+/*   Updated: 2022/12/16 16:13:07 by ebennamr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "lib.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "./libft/libft.h"
-# include "error.h"
-
-typedef struct s_data
+size_t	ft_strlen(const char *str)
 {
-	pid_t	pid1;
-	pid_t	pid2;
-	int		p[2];
-	int		in_fd;
-	int		out_fd;
-	char	*paths;
-	char	**list_paths;
-	char	**list_args;
-	char	*cmd;
-}	t_data;
+	size_t	len;
 
-int		cmd1(t_data info, char **av, char **env);
-int		cmd2(t_data info, char **av, char **env);
-#endif
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
+}
